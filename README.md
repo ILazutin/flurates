@@ -6,4 +6,4 @@ For application state management used BLoC
 
 ## Application sample
 
-[flurates](./git_img/sample.gif)
+![flurates](./git_img/sample.gif)
