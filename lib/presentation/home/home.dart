@@ -24,43 +24,45 @@ class HomePage extends StatelessWidget {
           } else {
             body = Padding(
               padding: EdgeInsets.fromLTRB(0, 150, 0, 0),
-              child: CircularProgressIndicator(),
+              child: Center(child: CircularProgressIndicator()),
             );
           }
 
-          return RefreshIndicator(
-              child: Stack(
-                children: <Widget>[
-                  HeaderImage(
-                    height: MediaQuery.of(context).size.height,
-                    child: Stack(
-                      children: <Widget>[
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                            Text(
-                              '${state.date.day} ${MONTHS[state.date.month]}',
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 120,
-                                color: Color(0xffffffff),
+          return SafeArea(
+              child: RefreshIndicator(
+                child: Stack(
+                  children: <Widget>[
+                    HeaderImage(
+                      height: MediaQuery.of(context).size.height,
+                      child: Stack(
+                        children: <Widget>[
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              Text(
+                                '${state.date.day} ${MONTHS[state.date.month]}',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 80,
+                                  color: Color(0xffffffff),
+                                ),
                               ),
-                            ),
-                          ],
-                        )
-                      ],
+                            ],
+                          )
+                        ],
+                      ),
                     ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(left: 16, right: 16),
-                    child: body,
-                  ),
-                ],
-              ),
-              onRefresh: () async {
-                BlocProvider.of<RateBloc>(context).add(RatesLoad());
-              },
+                    Padding(
+                      padding: EdgeInsets.only(left: 16, right: 16),
+                      child: body,
+                    ),
+                  ],
+                ),
+                onRefresh: () async {
+                  BlocProvider.of<RateBloc>(context).add(RatesLoad());
+                },
+              )
           );
         },
       ),
